@@ -2,7 +2,7 @@ title: Rayne
 # logo
 description: I am a student in HKUST MPP | PPEers
 # show_downloads: true
-# theme: jekyll-theme-minimal
-plugins:
-  - jekyll-remote-theme
-remote_theme: minimal
+theme: jekyll-theme-minimal
+#plugins:
+ # - jekyll-remote-theme
+#remote_theme: minimal
