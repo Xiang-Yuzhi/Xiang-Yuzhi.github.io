@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>Rayne | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 样式文件：继续用你现有的 styles.css -->
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">Rayne<span>.</span></div>
+            <div class="header-right">
+                <nav class="nav">
+                    <a href="#about">About</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#notes">Notes</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <!-- 全局搜索：搜索 Blog + Notes -->
+                <div class="global-search">
+                    <input
+                        type="text"
+                        id="global-search"
+                        placeholder="站内搜索（Blog & Notes）..."
+                    />
+                    <span class="global-search-icon">⌕</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-text">
+                <h1>Hi, I'm Rayne 👋</h1>
+                <p>
+                    这是我的个人主页：板式偏宽、导航菜单有「光效」悬停，
+                    并支持全站搜索 + 分区搜索。Blog 和 Study Notes 的内容由 JSON 索引动态生成。
+                </p>
+                <div class="hero-actions">
+                    <a href="#blog" class="btn primary">看看 Blog</a>
+                    <a href="#notes" class="btn secondary">学习笔记区</a>
+                </div>
+            </div>
+            <div class="hero-avatar">
+                <div class="avatar-placeholder">
+                    这里可以换成你的头像<br />
+                    （暂时是占位图）
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header-line">
+                <div>
+                    <h2 class="section-title">
+                        About Me
+                        <span class="section-title-badge">Profile</span>
+                    </h2>
+                    <p class="section-intro">
+                        这一块是你的个人简介区。现在是一个模板版本，
+                        之后可以改成更细致的介绍（研究线索、博士申请方向、跨学科背景等）。
+                    </p>
+                </div>
+            </div>
+
+            <div class="about-grid">
+                <div>
+                    <h3>个人简介</h3>
+                    <p>
+                        我是 Rayne，目前在探索社会政策、灵活就业与性别不平等等议题。
+                        平时喜欢写长篇笔记，也会画画、练琴、做一点点代码实验。
+                    </p>
+                    <p>
+                        这个网站对我来说更像是一个“公开版学习笔记本”，
+                        既是给自己看的，也欢迎别人偶然路过时翻一翻。
+                    </p>
+                </div>
+                <div>
+                    <h3>Basic Info</h3>
+                    <ul class="info-list">
+                        <!-- TODO: 这里可以改成你的真实信息 -->
+                        <li><span>Location:</span> Shanghai / Hong Kong (plan)</li>
+                        <li><span>Email:</span> your_email@example.com</li>
+                        <li><span>Interests:</span> Work & Family, Migration, Inequality</li>
+                        <li><span>Currently:</span> PhD applications & research</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog：由 JS + blog.json 生成 -->
+    <section id="blog" class="section section-alt">
+        <div class="container">
+            <div class="section-header-line">
+                <div>
+                    <h2 class="section-title">
+                        Blog
+                        <span class="section-title-badge">Diary & Essays</span>
+                    </h2>
+                    <p class="section-intro">
+                        这里是 Blog 区。下方的卡片由 <code>data/blog.json</code> 自动生成。
+                        你可以使用顶部的全局搜索，也可以用本区的搜索框来只过滤 Blog 内容。
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-header-with-actions">
+                <span style="font-size:0.83rem; color:var(--muted);">
+                    在下方搜索框中输入 <code>life</code>、<code>research</code> 等关键词试试看。
+                </span>
+                <input
+                    type="text"
+                    id="blog-search"
+                    class="search-input"
+                    placeholder="仅在 Blog 内搜索..."
+                />
+            </div>
+
+            <div id="blog-list" class="card-grid">
+                <!-- JS 会在这里插入 <article class="blog-card"> ... -->
+                <p id="blog-loading" style="color: var(--muted); font-size: 0.85rem;">
+                    Loading blog posts...
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Notes：由 JS + notes.json 生成 -->
+    <section id="notes" class="section">
+        <div class="container">
+            <div class="section-header-line">
+                <div>
+                    <h2 class="section-title">
+                        Study Notes
+                        <span class="section-title-badge">Notes Hub</span>
+                    </h2>
+                    <p class="section-intro">
+                        这是“学习笔记”区。下方卡片由 <code>data/notes.json</code> 自动生成。
+                        你可以通过 filter 选择主题，也可以使用搜索框查找特定内容。
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-header-with-actions">
+                <span style="font-size:0.83rem; color:var(--muted);">
+                    右侧可按主题筛选或在本区搜索，例如输入 <code>DID</code>、<code>R</code>。
+                </span>
+                <div class="notes-actions">
+                    <input
+                        type="text"
+                        id="notes-search"
+                        class="search-input"
+                        placeholder="在 Study Notes 内搜索..."
+                    />
+                    <select id="notes-filter" class="select-input">
+                        <option value="all">全部主题</option>
+                        <option value="method">方法论 / 计量</option>
+                        <option value="policy">公共政策</option>
+                        <option value="coding">编程 / 数据</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="notes-list" class="card-grid">
+                <!-- JS 会在这里插入 <article class="note-card"> ... -->
+                <p id="notes-loading" style="color: var(--muted); font-size: 0.85rem;">
+                    Loading notes...
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section-alt">
+        <div class="container">
+            <div class="section-header-line">
+                <div>
+                    <h2 class="section-title">
+                        Contact
+                        <span class="section-title-badge">Say Hi</span>
+                    </h2>
+                    <p class="section-intro">
+                        正式版中你可以写一点邀请语，比如：如果你对相关研究、合作或交换想法感兴趣，可以给我发邮件。
+                    </p>
+                </div>
+            </div>
+
+            <div class="contact-box">
+                <!-- TODO: 把 email 和 GitHub 改成你的 -->
+                <p><strong>Email:</strong> your_email@example.com</p>
+                <p>
+                    <strong>GitHub:</strong>
+                    <a href="https://github.com/Xiang-Yuzhi" target="_blank" rel="noopener">
+                        github.com/Xiang-Yuzhi
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span>© <span id="year"></span> Rayne. All rights reserved.</span>
+            <span class="footer-note">Built with HTML · CSS · JS · JSON.</span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

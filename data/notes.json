@@ -1,0 +1,30 @@
+[
+  {
+    "id": "note-2025-11-24-did",
+    "title": "DID 的几个关键假设",
+    "category": "method",
+    "tags": ["method", "econometrics", "DID"],
+    "excerpt": "平行趋势假设、共同冲击、稳定单元……一些帮助记忆 DID 逻辑的小提示。",
+    "links": [
+      {
+        "label": "📒 Notion 详细笔记",
+        "url": "https://www.notion.so"
+      }
+    ],
+    "contentUrl": "posts/notes/2025-11-24-did-basics.html"
+  },
+  {
+    "id": "note-2025-11-24-fe-r",
+    "title": "R 中的固定效应模型小抄",
+    "category": "coding",
+    "tags": ["coding", "R", "panel"],
+    "excerpt": "记录用 fixest / lfe 跑固定效应模型的大致代码结构，比如 feols(y ~ x | id + year)。",
+    "links": [
+      {
+        "label": "💻 GitHub 代码仓库",
+        "url": "https://github.com"
+      }
+    ],
+    "contentUrl": "posts/notes/2025-11-24-fe-r.html"
+  }
+]
