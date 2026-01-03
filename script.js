@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setupBlogSearch();
         setupNotesFilter();
         setupNotesSearch();
+        setupBackToTop();
     });
 });
 
@@ -164,6 +165,36 @@ function setupGlobalSearch() {
             card.style.display = text.includes(keyword) ? "" : "none";
         });
     });
+
+    // 处理回车跳转逻辑 (Enter to Jump)
+    globalInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            const keyword = this.value.toLowerCase().trim();
+            if (!keyword) return;
+
+            // 寻找第一个可见的卡片 (博客或笔记)
+            const firstVisibleCard = Array.from(document.querySelectorAll(".blog-card, .note-card"))
+                .find(card => card.style.display !== "none");
+
+            if (firstVisibleCard) {
+                // 平滑滚动并将目标置于页面中心
+                firstVisibleCard.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                // 添加临时高亮效果
+                firstVisibleCard.classList.remove("search-highlight");
+                void firstVisibleCard.offsetWidth; // 触发重绘以重启动画
+                firstVisibleCard.classList.add("search-highlight");
+
+                // 2秒后移除类名，方便下次触发
+                setTimeout(() => {
+                    firstVisibleCard.classList.remove("search-highlight");
+                }, 2000);
+            }
+        }
+    });
 }
 
 /* ========== Blog 区域搜索 ========== */
@@ -199,42 +230,74 @@ function setupBlogSearch() {
     });
 }
 
-/* ========== Notes 分类 Filter ========== */
+/* ========== Notes 分类 Filter (Custom Dropdown) ========== */
 function setupNotesFilter() {
-    const filterSelect = document.getElementById("notes-filter");
-    if (!filterSelect) return;
+    const dropdown = document.getElementById("notes-filter-dropdown");
+    if (!dropdown) return;
 
-    filterSelect.addEventListener("change", function () {
-        const value = this.value;
-        const keyword =
-            (document.getElementById("notes-search")?.value || "")
-                .toLowerCase()
-                .trim();
-        const globalInput = document.getElementById("global-search");
+    const trigger = dropdown.querySelector(".dropdown-trigger");
+    const selectedText = document.getElementById("dropdown-selected-text");
+    const options = dropdown.querySelectorAll(".dropdown-option");
 
-        const noteCards = document.querySelectorAll(".note-card");
-        noteCards.forEach((card) => {
-            const category = card.getAttribute("data-category") || "all";
-            const text = card.textContent.toLowerCase();
-            const matchCategory = value === "all" || value === category;
-            const matchKeyword = !keyword || text.includes(keyword);
-            const matchGlobal = !globalInput || !globalInput.value;
+    // 切换下拉框显示/隐藏
+    trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("open");
+    });
 
-            const show = matchCategory && matchKeyword && matchGlobal;
-            card.style.display = show ? "" : "none";
+    // 点击外部关闭下拉框
+    document.addEventListener("click", () => {
+        dropdown.classList.remove("open");
+    });
+
+    // 处理选项点击
+    options.forEach((option) => {
+        option.addEventListener("click", function () {
+            const value = this.getAttribute("data-value");
+            const text = this.textContent;
+
+            // 更新 UI
+            selectedText.textContent = text;
+            options.forEach((opt) => opt.classList.remove("active"));
+            this.classList.add("active");
+
+            // 触发过滤逻辑
+            filterNotes(value);
         });
+    });
+}
+
+function filterNotes(categoryValue) {
+    const keyword = (document.getElementById("notes-search")?.value || "")
+        .toLowerCase()
+        .trim();
+    const globalInput = document.getElementById("global-search");
+
+    const noteCards = document.querySelectorAll(".note-card");
+    noteCards.forEach((card) => {
+        const category = card.getAttribute("data-category") || "all";
+        const text = card.textContent.toLowerCase();
+        
+        const matchCategory = categoryValue === "all" || categoryValue === category;
+        const matchKeyword = !keyword || text.includes(keyword);
+        const matchGlobal = !globalInput || !globalInput.value;
+
+        const show = matchCategory && matchKeyword && matchGlobal;
+        card.style.display = show ? "" : "none";
     });
 }
 
 /* ========== Notes 搜索（配合 Filter） ========== */
 function setupNotesSearch() {
     const searchInput = document.getElementById("notes-search");
-    const filterSelect = document.getElementById("notes-filter");
     if (!searchInput) return;
 
     searchInput.addEventListener("input", function () {
         const keyword = this.value.toLowerCase().trim();
-        const filterValue = filterSelect ? filterSelect.value : "all";
+        
+        // 获取当前选中的分类值
+        const activeOption = document.querySelector(".dropdown-option.active");
+        const filterValue = activeOption ? activeOption.getAttribute("data-value") : "all";
 
         const globalInput = document.getElementById("global-search");
         if (keyword && globalInput) globalInput.value = "";
@@ -247,6 +310,27 @@ function setupNotesSearch() {
             const matchKeyword = !keyword || text.includes(keyword);
             const show = matchCategory && matchKeyword;
             card.style.display = show ? "" : "none";
+        });
+    });
+}
+
+/* ========== 回至顶部 (Back to Top) ========== */
+function setupBackToTop() {
+    const backToTopBtn = document.getElementById("back-to-top");
+    if (!backToTopBtn) return;
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add("show");
+        } else {
+            backToTopBtn.classList.remove("show");
+        }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
     });
 }
