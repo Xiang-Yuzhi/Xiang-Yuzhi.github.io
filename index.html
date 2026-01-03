@@ -11,20 +11,20 @@
     <!-- 顶部导航 -->
     <header class="site-header">
         <div class="container header-inner">
-            <div class="logo">Rayne<span>.</span></div>
+            <div class="logo">雨之<span>.</span></div>
             <div class="header-right">
                 <nav class="nav">
-                    <a href="#about">About</a>
-                    <a href="#blog">Blog</a>
-                    <a href="#notes">Notes</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#about">关于我</a>
+                    <a href="#blog">博客</a>
+                    <a href="#notes">笔记</a>
+                    <a href="#contact">联系我</a>
                 </nav>
                 <!-- 全局搜索：搜索 Blog + Notes -->
                 <div class="global-search">
                     <input
                         type="text"
                         id="global-search"
-                        placeholder="站内搜索（Blog & Notes）..."
+                        placeholder="输入关键词 ..."
                     />
                     <span class="global-search-icon">⌕</span>
                 </div>
@@ -36,10 +36,10 @@
     <section class="hero">
         <div class="container hero-inner">
             <div class="hero-text">
-                <h1>Hi, I'm Rayne 👋</h1>
+                <h1>你好, 我是雨之 👋</h1>
                 <p>
-                    这是我的个人主页：板式偏宽、导航菜单有「光效」悬停，
-                    并支持全站搜索 + 分区搜索。Blog 和 Study Notes 的内容由 JSON 索引动态生成。
+                   这是我的个人主页，我会在此分享一些阅读、学习与思考。希望你能寻找到想要的东西~
+                   如果对任何内容感兴趣，你可以通过底部的邮箱联系到我~
                 </p>
                 <div class="hero-actions">
                     <a href="#blog" class="btn primary">看看 Blog</a>
@@ -47,9 +47,10 @@
                 </div>
             </div>
             <div class="hero-avatar">
-                <div class="avatar-placeholder">
-                    这里可以换成你的头像<br />
-                    （暂时是占位图）
+                <div class="avatar-placeholder"
+                style="padding: 0; overflow: hidden;">
+                    <img src="Avatar图片.png" alt="向仁雨头像"
+                    style="width: 105%; height: 105%; object-fit: cover; border-radius: 999px;">
                 </div>
             </div>
         </div>
@@ -61,36 +62,58 @@
             <div class="section-header-line">
                 <div>
                     <h2 class="section-title">
-                        About Me
-                        <span class="section-title-badge">Profile</span>
-                    </h2>
+                        关于我
+                        <span class="section-title-badge">档案</span>
+                    <!-- </h2>
                     <p class="section-intro">
-                        这一块是你的个人简介区。现在是一个模板版本，
-                        之后可以改成更细致的介绍（研究线索、博士申请方向、跨学科背景等）。
-                    </p>
+                        😀 你或许想了解一些有关网页主人的基本信息？
+                    </p> -->
                 </div>
             </div>
 
             <div class="about-grid">
                 <div>
                     <h3>个人简介</h3>
+                    <!-- <p>
+                        “雨之”，是20岁那年最敬仰的(现在依然是)老师为我取的字。“雨”作动词，寓意滋润万物；“之”严格来说是助词，但隐含了对象。
+                    </p> -->
                     <p>
-                        我是 Rayne，目前在探索社会政策、灵活就业与性别不平等等议题。
-                        平时喜欢写长篇笔记，也会画画、练琴、做一点点代码实验。
+                        从武汉大学政治学、经济学与哲学专业(PPE)毕业后，我通过百贤亚洲研究院的全额奖学金来到香港科技大学攻读公共政策(MPP)硕士学位，同时也参与百贤亚洲研究院的亚洲未来领袖学者计划。
                     </p>
                     <p>
-                        这个网站对我来说更像是一个“公开版学习笔记本”，
-                        既是给自己看的，也欢迎别人偶然路过时翻一翻。
+                        2019至2023年，我主要在武汉跟随不同的课题组进行基层治理与社会政策方面的深度科研。从2024年开始，我逐步转型，开始对产品经理、AI、供应链、投资等相关领域进行学习，并曾在亚马逊、阿里国际(LAZADA)相关部门实习。
+                    </p>
+                    <p>
+                        目前，我仍在持续思考着怎样将过去看似“无关”的能力应用在不断变革的社会之中。
                     </p>
                 </div>
                 <div>
-                    <h3>Basic Info</h3>
+                    <h3>基本信息</h3>
                     <ul class="info-list">
-                        <!-- TODO: 这里可以改成你的真实信息 -->
-                        <li><span>Location:</span> Shanghai / Hong Kong (plan)</li>
-                        <li><span>Email:</span> your_email@example.com</li>
-                        <li><span>Interests:</span> Work & Family, Migration, Inequality</li>
-                        <li><span>Currently:</span> PhD applications & research</li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>现居地:</span> 香港 / 深圳 
+                        </li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            <span>Email:</span> <a href="mailto:Xiang_Renyu@outlook.com">Xiang_Renyu@outlook.com</a>
+                        </li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+                            <span>研究方向:</span> 政治经济学、政治行为、政策学习、社会政策
+                        </li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <span>目前兴趣:</span> Agent、AI应用、供应链、投资&创业
+                        </li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            <span>GitHub:</span> <a href="https://github.com/Xiang-Yuzhi" target="_blank" rel="noopener">Xiang-Yuzhi</a>
+                        </li>
+                        <li>
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+                            <span>CV:</span> <a href="CV_Xiang_Renyu.pdf" target="_blank" rel="noopener" type="application/pdf">PDF</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -103,25 +126,27 @@
             <div class="section-header-line">
                 <div>
                     <h2 class="section-title">
-                        Blog
-                        <span class="section-title-badge">Diary & Essays</span>
+                        博客
+                        <span class="section-title-badge">记录 & 思考</span>
                     </h2>
                     <p class="section-intro">
-                        这里是 Blog 区。下方的卡片由 <code>data/blog.json</code> 自动生成。
-                        你可以使用顶部的全局搜索，也可以用本区的搜索框来只过滤 Blog 内容。
+                        “仰望星空，脚踏实地，快速行动”
+                        <!-- 这里是 Blog 区。下方的卡片由 <code>data/blog.json</code> 自动生成。
+                        你可以使用顶部的全局搜索，也可以用本区的搜索框来只过滤 Blog 内容。 -->
                     </p>
                 </div>
             </div>
 
             <div class="section-header-with-actions">
                 <span style="font-size:0.83rem; color:var(--muted);">
-                    在下方搜索框中输入 <code>life</code>、<code>research</code> 等关键词试试看。
+                    在这里可以一起“阅读”、“思考”、“记录”。
+                    <!-- 在下方搜索框中输入 <code>life</code>、<code>research</code> 等关键词试试看。 -->
                 </span>
                 <input
                     type="text"
                     id="blog-search"
                     class="search-input"
-                    placeholder="仅在 Blog 内搜索..."
+                    placeholder="在 博客 内搜索 ..."
                 />
             </div>
 
@@ -140,33 +165,42 @@
             <div class="section-header-line">
                 <div>
                     <h2 class="section-title">
-                        Study Notes
-                        <span class="section-title-badge">Notes Hub</span>
+                        笔记
+                        <span class="section-title-badge">知识库</span>
                     </h2>
                     <p class="section-intro">
-                        这是“学习笔记”区。下方卡片由 <code>data/notes.json</code> 自动生成。
-                        你可以通过 filter 选择主题，也可以使用搜索框查找特定内容。
+                        “成长永不止步”
+                        <!-- 这是“学习笔记”区。下方卡片由 <code>data/notes.json</code> 自动生成。
+                        你可以通过 filter 选择主题，也可以使用搜索框查找特定内容。 -->
                     </p>
                 </div>
             </div>
 
             <div class="section-header-with-actions">
                 <span style="font-size:0.83rem; color:var(--muted);">
-                    右侧可按主题筛选或在本区搜索，例如输入 <code>DID</code>、<code>R</code>。
+                    在这里可以找到不同主题的知识内容。
+                    <!-- 右侧可按主题筛选或在本区搜索，例如输入 <code>DID</code>、<code>R</code>。 -->
                 </span>
                 <div class="notes-actions">
                     <input
                         type="text"
                         id="notes-search"
                         class="search-input"
-                        placeholder="在 Study Notes 内搜索..."
+                        placeholder="在 知识库 内搜索..."
                     />
-                    <select id="notes-filter" class="select-input">
-                        <option value="all">全部主题</option>
-                        <option value="method">方法论 / 计量</option>
-                        <option value="policy">公共政策</option>
-                        <option value="coding">编程 / 数据</option>
-                    </select>
+                <div class="custom-dropdown" id="notes-filter-dropdown">
+                    <div class="dropdown-trigger">
+                        <span id="dropdown-selected-text">全部主题</span>
+                        <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-option active" data-value="all">全部主题</div>
+                        <div class="dropdown-option" data-value="product">产品/设计</div>
+                        <div class="dropdown-option" data-value="methodology">统计/计量/RCTs</div>
+                        <div class="dropdown-option" data-value="Computer Science">Coding / AI</div>
+                        <div class="dropdown-option" data-value="policy">社会政策/公共政策</div>
+                    </div>
+                </div>
                 </div>
             </div>
 
@@ -185,24 +219,32 @@
             <div class="section-header-line">
                 <div>
                     <h2 class="section-title">
-                        Contact
-                        <span class="section-title-badge">Say Hi</span>
+                        联系我
+                        <span class="section-title-badge">打个招呼吧</span>
                     </h2>
                     <p class="section-intro">
-                        正式版中你可以写一点邀请语，比如：如果你对相关研究、合作或交换想法感兴趣，可以给我发邮件。
+                        如果你对相关研究、合作或交换想法感兴趣，非常欢迎给我发邮件~
+                    </p>
+                    <p class="section-intro">
+                        假如你在深圳，我们也可以一起喝喝咖啡/茶、聊聊天。
                     </p>
                 </div>
             </div>
 
             <div class="contact-box">
-                <!-- TODO: 把 email 和 GitHub 改成你的 -->
-                <p><strong>Email:</strong> your_email@example.com</p>
-                <p>
-                    <strong>GitHub:</strong>
-                    <a href="https://github.com/Xiang-Yuzhi" target="_blank" rel="noopener">
-                        github.com/Xiang-Yuzhi
-                    </a>
-                </p>
+                <ul class="info-list">
+                    <li>
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span>Email:</span> 
+                        <a href="mailto:Xiang_Renyu@outlook.com">Xiang_Renyu@outlook.com</a> or 
+                        <a href="mailto:X.renyu0620@gmail.com">X.renyu0620@gmail.com</a>
+                    </li>
+                    <li>
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        <span>GitHub:</span> 
+                        <a href="https://github.com/Xiang-Yuzhi" target="_blank" rel="noopener">Xiang-Yuzhi</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
@@ -210,10 +252,15 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container footer-inner">
-            <span>© <span id="year"></span> Rayne. All rights reserved.</span>
-            <span class="footer-note">Built with HTML · CSS · JS · JSON.</span>
+            <span>© <span id="year"></span> 雨之. All rights reserved.</span>
+            <span class="footer-note">Built with Vibe Coding (assisted by Antigravity).</span>
         </div>
     </footer>
+
+    <!-- 回至顶部按钮 (Back to Top) -->
+    <div id="back-to-top" class="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    </div>
 
     <script src="script.js"></script>
 </body>
