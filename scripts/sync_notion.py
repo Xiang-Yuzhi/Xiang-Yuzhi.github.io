@@ -188,7 +188,7 @@ def generate_html(title, date, category, content_html):
     <meta charset="UTF-8" />
     <title>{title} | Rayne</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
     <style>
         body {{
             background:
@@ -359,7 +359,7 @@ def sync():
     blog_data = []
     notes_data = []
     
-    ASSETS_FOLDER = "docs/assets/posts"
+    ASSETS_FOLDER = "assets/posts"
     os.makedirs(ASSETS_FOLDER, exist_ok=True)
 
     for row in rows:
@@ -427,7 +427,7 @@ def sync():
         content_html = "\n".join(content_parts)
         
         # 生成 HTML 文件
-        folder = "docs/posts/blogs" if category.lower() == "blog" else "docs/posts/notes"
+        folder = "posts/blogs" if category.lower() == "blog" else "posts/notes"
         os.makedirs(folder, exist_ok=True)
         filename = f"{slug}.html"
         file_path = f"{folder}/{filename}"
@@ -455,10 +455,10 @@ def sync():
             notes_data.append(item)
 
     # 写入 JSON 文件
-    with open("docs/data/blog.json", "w", encoding="utf-8") as f:
+    with open("data/blog.json", "w", encoding="utf-8") as f:
         json.dump(blog_data, f, ensure_ascii=False, indent=2)
     
-    with open("docs/data/notes.json", "w", encoding="utf-8") as f:
+    with open("data/notes.json", "w", encoding="utf-8") as f:
         json.dump(notes_data, f, ensure_ascii=False, indent=2)
 
     print(f"🎉 同步完成！共同步 {len(rows)} 篇文章。")
