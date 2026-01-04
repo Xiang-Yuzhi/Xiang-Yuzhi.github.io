@@ -199,37 +199,39 @@ def generate_html(title, date, category, content_html):
             line-height: 1.7;
         }}
         .post-container {{
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 4rem 1.5rem 8rem;
+            padding: 4rem 2rem 8rem;
         }}
         .post-container h1 {{ 
-            font-size: 2.6rem; 
-            margin-bottom: 0.8rem; 
+            font-size: 2.2rem; 
+            margin-bottom: 1rem; 
             color: #fff;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
         }}
         .post-meta {{ 
-            font-size: 0.95rem; 
+            font-size: 0.9rem; 
             color: var(--muted); 
-            margin-bottom: 3.5rem; 
-            padding-bottom: 1.2rem; 
+            margin-bottom: 4rem; 
+            padding-bottom: 1.5rem; 
             border-bottom: 1px solid rgba(148,163,184,0.1); 
         }}
         .post-content {{ 
             color: #d1d5db; 
-            font-size: 1.1rem; 
+            font-size: 1.0rem; 
+            line-height: 1.8;
         }}
-        .post-content p {{ margin: 1.4rem 0; }}
-        .post-content h1 {{ margin: 2.5rem 0 1.2rem; font-size: 2rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }}
+        .post-content p {{ margin: 1.5rem 0; }}
+        .post-content h1 {{ margin: 3rem 0 1.5rem; font-size: 1.8rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; }}
         .post-content h2 {{ 
-            margin: 3rem 0 1.2rem; 
-            font-size: 1.8rem; 
+            margin: 3.5rem 0 1.2rem; 
+            font-size: 1.6rem; 
             color: #fff;
             border-left: 4px solid var(--accent); 
             padding-left: 1.2rem; 
         }}
-        .post-content h3 {{ margin: 2.2rem 0 1rem; font-size: 1.45rem; color: #fff; }}
+        .post-content h3 {{ margin: 2.5rem 0 1rem; font-size: 1.3rem; color: #fff; }}
         
         /* 列表 */
         .post-content ul, .post-content ol {{ padding-left: 1.8rem; margin: 1.5rem 0; }}
