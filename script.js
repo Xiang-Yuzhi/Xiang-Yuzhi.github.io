@@ -47,7 +47,7 @@ function loadBlog() {
                     ${
                         post.contentUrl
                             ? `<div style="margin-top:0.4rem;">
-                                    <a href="${post.contentUrl}" class="btn secondary" style="font-size:0.78rem; padding:0.25rem 0.8rem;" target="_blank" rel="noopener">
+                                    <a href="${post.contentUrl}" class="btn secondary" style="font-size:0.78rem; padding:0.25rem 0.8rem;">
                                         阅读全文 →
                                     </a>
                                </div>`
@@ -82,7 +82,7 @@ function loadNotes() {
                 const linksHtml = (note.links || [])
                     .map(
                         (link) => `
-                        <a href="${link.url}" target="_blank" rel="noopener">
+                        <a href="${link.url}">
                             ${link.label}
                         </a>`
                     )
@@ -104,7 +104,7 @@ function loadNotes() {
                     ${
                         note.contentUrl
                             ? `<div style="margin-top:0.4rem;">
-                                    <a href="${note.contentUrl}" class="btn secondary" style="font-size:0.78rem; padding:0.25rem 0.8rem;" target="_blank" rel="noopener">
+                                    <a href="${note.contentUrl}" class="btn secondary" style="font-size:0.78rem; padding:0.25rem 0.8rem;">
                                         查看详细笔记 →
                                     </a>
                                </div>`
