@@ -199,39 +199,39 @@ def generate_html(title, date, category, content_html):
             line-height: 1.7;
         }}
         .post-container {{
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 4rem 2rem 8rem;
+            padding: 4rem 1.5rem 8rem;
         }}
         .post-container h1 {{ 
-            font-size: 2.2rem; 
-            margin-bottom: 1rem; 
+            font-size: 2.1rem; 
+            margin-bottom: 0.8rem; 
             color: #fff;
-            letter-spacing: -0.01em;
-            line-height: 1.3;
+            letter-spacing: -0.015em;
+            line-height: 1.25;
         }}
         .post-meta {{ 
-            font-size: 0.9rem; 
+            font-size: 0.88rem; 
             color: var(--muted); 
-            margin-bottom: 4rem; 
-            padding-bottom: 1.5rem; 
+            margin-bottom: 3.5rem; 
+            padding-bottom: 1.2rem; 
             border-bottom: 1px solid rgba(148,163,184,0.1); 
         }}
         .post-content {{ 
             color: #d1d5db; 
-            font-size: 1.0rem; 
-            line-height: 1.8;
+            font-size: 0.95rem; 
+            line-height: 1.75;
         }}
-        .post-content p {{ margin: 1.5rem 0; }}
-        .post-content h1 {{ margin: 3rem 0 1.5rem; font-size: 1.8rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.6rem; }}
+        .post-content p {{ margin: 1.2rem 0; }}
+        .post-content h1 {{ margin: 2.8rem 0 1.2rem; font-size: 1.7rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }}
         .post-content h2 {{ 
-            margin: 3.5rem 0 1.2rem; 
-            font-size: 1.6rem; 
+            margin: 3.2rem 0 1.1rem; 
+            font-size: 1.5rem; 
             color: #fff;
             border-left: 4px solid var(--accent); 
-            padding-left: 1.2rem; 
+            padding-left: 1.1rem; 
         }}
-        .post-content h3 {{ margin: 2.5rem 0 1rem; font-size: 1.3rem; color: #fff; }}
+        .post-content h3 {{ margin: 2.2rem 0 0.9rem; font-size: 1.2rem; color: #fff; }}
         
         /* 列表 */
         .post-content ul, .post-content ol {{ padding-left: 1.8rem; margin: 1.5rem 0; }}
@@ -359,7 +359,7 @@ def sync():
     blog_data = []
     notes_data = []
     
-    ASSETS_FOLDER = "assets/posts"
+    ASSETS_FOLDER = "docs/assets/posts"
     os.makedirs(ASSETS_FOLDER, exist_ok=True)
 
     for row in rows:
@@ -427,7 +427,7 @@ def sync():
         content_html = "\n".join(content_parts)
         
         # 生成 HTML 文件
-        folder = "posts/blogs" if category.lower() == "blog" else "posts/notes"
+        folder = "docs/posts/blogs" if category.lower() == "blog" else "docs/posts/notes"
         os.makedirs(folder, exist_ok=True)
         filename = f"{slug}.html"
         file_path = f"{folder}/{filename}"
@@ -455,10 +455,10 @@ def sync():
             notes_data.append(item)
 
     # 写入 JSON 文件
-    with open("data/blog.json", "w", encoding="utf-8") as f:
+    with open("docs/data/blog.json", "w", encoding="utf-8") as f:
         json.dump(blog_data, f, ensure_ascii=False, indent=2)
     
-    with open("data/notes.json", "w", encoding="utf-8") as f:
+    with open("docs/data/notes.json", "w", encoding="utf-8") as f:
         json.dump(notes_data, f, ensure_ascii=False, indent=2)
 
     print(f"🎉 同步完成！共同步 {len(rows)} 篇文章。")
