@@ -8,6 +8,8 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 显式允许 Action 提交代码回仓库
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

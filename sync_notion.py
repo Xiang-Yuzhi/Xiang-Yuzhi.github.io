@@ -8,6 +8,10 @@ from datetime import datetime
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
 DATABASE_ID = os.getenv("DATABASE_ID")
 
+if not NOTION_TOKEN or not DATABASE_ID:
+    print("错误: 缺少环境变量 NOTION_TOKEN 或 DATABASE_ID")
+    exit(1)
+
 HEADERS = {
     "Authorization": f"Bearer {NOTION_TOKEN}",
     "Content-Type": "application/json",
@@ -24,14 +28,19 @@ def get_db_rows():
             }
         }
     }
+    print(f"正在查询数据库: {DATABASE_ID}...")
     res = requests.post(url, json=payload, headers=HEADERS)
-    res.raise_for_status()
+    if res.status_code != 200:
+        print(f"查询失败! 状态码: {res.status_code}, 详情: {res.text}")
+        res.raise_for_status()
     return res.json()["results"]
 
 def get_page_content(page_id):
     url = f"https://api.notion.com/v1/blocks/{page_id}/children"
     res = requests.get(url, headers=HEADERS)
-    res.raise_for_status()
+    if res.status_code != 200:
+        print(f"获取页面正文失败! 状态码: {res.status_code}, 详情: {res.text}")
+        res.raise_for_status()
     return res.json()["results"]
 
 def block_to_html(block):
