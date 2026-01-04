@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>DeepWisdom - MGX产品使用评测 | Rayne</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
     <style>
         body {
             background:
@@ -15,49 +15,51 @@
             line-height: 1.7;
         }
         .post-container {
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
             padding: 4rem 1.5rem 8rem;
         }
         .post-container h1 { 
-            font-size: 2.6rem; 
-            margin-bottom: 0.8rem; 
+            font-size: 1.7rem; 
+            margin-bottom: 0.5rem; 
             color: #fff;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.012em;
+            line-height: 1.2;
         }
         .post-meta { 
-            font-size: 0.95rem; 
+            font-size: 0.8rem; 
             color: var(--muted); 
-            margin-bottom: 3.5rem; 
-            padding-bottom: 1.2rem; 
+            margin-bottom: 2.8rem; 
+            padding-bottom: 0.9rem; 
             border-bottom: 1px solid rgba(148,163,184,0.1); 
         }
         .post-content { 
             color: #d1d5db; 
-            font-size: 1.1rem; 
+            font-size: 0.88rem; 
+            line-height: 1.62;
         }
-        .post-content p { margin: 1.4rem 0; }
-        .post-content h1 { margin: 2.5rem 0 1.2rem; font-size: 2rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-content p { margin: 0.9rem 0; }
+        .post-content h1 { margin: 2rem 0 0.8rem; font-size: 1.45rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
         .post-content h2 { 
-            margin: 3rem 0 1.2rem; 
-            font-size: 1.8rem; 
+            margin: 2.22rem 0 0.8rem; 
+            font-size: 1.3rem; 
             color: #fff;
-            border-left: 4px solid var(--accent); 
-            padding-left: 1.2rem; 
+            border-left: 3px solid var(--accent); 
+            padding-left: 0.9rem; 
         }
-        .post-content h3 { margin: 2.2rem 0 1rem; font-size: 1.45rem; color: #fff; }
+        .post-content h3 { margin: 1.7rem 0 0.6rem; font-size: 1.05rem; color: #fff; }
         
         /* 列表 */
-        .post-content ul, .post-content ol { padding-left: 1.8rem; margin: 1.5rem 0; }
-        .post-content li { margin: 0.7rem 0; }
+        .post-content ul, .post-content ol { padding-left: 1.4rem; margin: 1.1rem 0; }
+        .post-content li { margin: 0.45rem 0; }
         
         /* 图片 */
-        .post-image { margin: 2.5rem 0; text-align: center; }
+        .post-image { margin: 1.8rem 0; text-align: center; }
         .post-image img { 
             max-width: 100%; 
-            border-radius: 16px; 
-            border: 1px solid rgba(148, 163, 184, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3); 
+            border-radius: 10px; 
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3); 
         }
         
         /* 表格 */
@@ -65,79 +67,85 @@
             width: 100%; 
             border-collapse: separate; 
             border-spacing: 0;
-            margin: 2.5rem 0; 
-            font-size: 0.95rem; 
+            margin: 1.8rem 0; 
+            font-size: 0.86rem; 
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(15, 23, 42, 0.35);
         }
         th, td { 
             border-bottom: 1px solid var(--border); 
             border-right: 1px solid var(--border); 
-            padding: 1rem; 
+            padding: 0.75rem; 
             text-align: left; 
         }
-        th { background: rgba(56, 189, 248, 0.05); font-weight: 600; color: var(--accent); }
+        th { background: rgba(56, 189, 248, 0.04); font-weight: 600; color: var(--accent); }
         tr:last-child td { border-bottom: none; }
         td:last-child, th:last-child { border-right: none; }
         
         /* 引用 */
         blockquote { 
-            margin: 2.5rem 0; 
-            padding: 1.2rem 1.8rem; 
-            border-left: 4px solid var(--accent); 
-            background: rgba(56, 189, 248, 0.05); 
+            margin: 1.8rem 0; 
+            padding: 0.9rem 1.4rem; 
+            border-left: 2px solid var(--accent); 
+            background: rgba(56, 189, 248, 0.04); 
             font-style: italic; 
-            border-radius: 0 12px 12px 0; 
+            border-radius: 4px; 
             color: #94a3b8;
         }
         
         /* 代码 */
         pre { 
             background: #0f172a; 
-            padding: 1.5rem; 
-            border-radius: 14px; 
+            padding: 1.1rem; 
+            border-radius: 10px; 
             overflow-x: auto; 
-            margin: 2rem 0; 
+            margin: 1.4rem 0; 
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
-        code { font-family: 'Fira Code', monospace; font-size: 0.95rem; }
+        code { font-family: 'Fira Code', monospace; font-size: 0.82rem; }
         p code { 
-            background: rgba(56, 189, 248, 0.15); 
-            padding: 0.2rem 0.5rem; 
-            border-radius: 6px; 
+            background: rgba(56, 189, 248, 0.08); 
+            padding: 0.15rem 0.35rem; 
+            border-radius: 4px; 
             color: var(--accent); 
-            font-size: 0.9em;
+            font-size: 0.88em;
         }
         
         /* Callout */
         .callout { 
             display: flex; 
             align-items: flex-start; 
-            gap: 1.2rem; 
-            padding: 1.5rem; 
-            background: rgba(148, 163, 184, 0.05); 
-            border-radius: 14px; 
-            margin: 2rem 0; 
+            gap: 0.9rem; 
+            padding: 1rem; 
+            background: rgba(148, 163, 184, 0.03); 
+            border-radius: 8px; 
+            margin: 1.4rem 0; 
             border: 1px solid rgba(148, 163, 184, 0.1); 
         }
-        .callout-icon { font-size: 1.6rem; line-height: 1; }
+        .callout-icon { font-size: 1.3rem; line-height: 1; }
         
-        .back-link { font-size: 1rem; margin-top: 5rem; padding-top: 2.5rem; border-top: 1px solid rgba(148,163,184,0.1); }
+        /* 返回链接 - 恢复并优化前几版的好看风格 */
+        .back-link { font-size: 0.85rem; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid rgba(148,163,184,0.1); }
         .back-link a { 
             color: var(--accent); 
             text-decoration: none; 
             font-weight: 500; 
-            padding: 0.6rem 1.2rem;
-            background: rgba(56, 189, 248, 0.08);
+            padding: 0.6rem 1.3rem;
+            background: rgba(56, 189, 248, 0.06);
             border: 1px solid rgba(56, 189, 248, 0.2);
             border-radius: 999px;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .back-link a:hover { 
-            background: rgba(56, 189, 248, 0.15);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+            transform: translateX(-4px);
         }
     </style>
 </head>
@@ -162,7 +170,7 @@
 <div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <p>但是这里没有给用户透出不同LLM大致的定价及对应积分消耗。用户至始至终都不知道积分消耗是依据什么来定的，以及单次对话或者是单个需求提出会消耗多少积分（虽然HR在与我沟通时提到每天5次的免费额度，但我也产生了误解，认为是5次对话额度）。这会造成两个结果：</p>
 <p>具体来看问题的表现。针对这个Remix，我分别提出了两个不同难度等级的需求：</p>
-<div class="column-list" style="display: flex; gap: 1rem; flex-wrap: wrap;"><div class="column" style="flex: 1; min-width: 250px;"><table>
+<table>
 <thead>
 <tr>
   <th>#</th>
@@ -179,9 +187,11 @@
   <td>针对整个CRM适应的业务场景，我希望从头开始重新设计</td>
 </tr>
 </tbody>
-</table><p></p></div><div class="column" style="flex: 1; min-width: 250px;"><div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div></div><div class="column" style="flex: 1; min-width: 250px;"><div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div></div></div>
+</table>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <p>细节的问题点及优化建议：</p>
-<div class="column-list" style="display: flex; gap: 1rem; flex-wrap: wrap;"><div class="column" style="flex: 1; min-width: 250px;"><table>
+<table>
 <thead>
 <tr>
   <th><b>#</b></th>
@@ -213,17 +223,98 @@
   <td>• 除了LLM的选用价格外，在每一个Agent调用时都标明所消耗的积分或者token数。给用户提供清晰的感知</td>
 </tr>
 </tbody>
-</table></div><div class="column" style="flex: 1; min-width: 250px;"><div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div></div></div>
+</table>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <h2>3. Agent对话框相关设计</h2>
-<!-- Unsupported block type: child_database -->
+<table>
+<tbody>
+<tr>
+  <td>#</td>
+  <td>问题表现</td>
+  <td>优化建议</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>Agent思考过程与返回内容存在重叠，占用页面，影响用户下滑体验</td>
+  <td>Agent的reasoning过程在思考过后自动折叠，不再默认展开</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>复杂需求时没有Agent搜索定位功能帮助用户定位具体是哪一个Agent的产出了什么内容，不方便用户@针对性的Agent来提出需求</td>
+  <td>在对话款顶部或者对话框内设计检索“放大镜”来方便用户检索&定位与Agent对话内容</td>
+</tr>
+</tbody>
+</table>
 <h2>4. 首页团队模式不同Agent的用途介绍无需做成鼠标悬停提示，可以直接展出</h2>
 <p>进入MGX后选择“团队模式”，可以直接将团队角色及功能展出，清晰功能边界，引导用户选择体验而不是设计为悬停。</p>
 <div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <h2>5. 部分导航栏内容及整体产品模块设计可优化调整</h2>
-<!-- Unsupported block type: child_database -->
+<table>
+<tbody>
+<tr>
+  <td>#</td>
+  <td>所属模块</td>
+  <td>现状</td>
+  <td>调整建议</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>导航栏</td>
+  <td>“博客"栏”取名“博客”，但实际上内容为MGX官方信息宣传和发布栏目，“博客”一名对参与主体定位不清，同时首页对话框下方又有一个“博客”产品设计，容易产生误会</td>
+  <td>修改为“广播”，更接近官方信息及宣传口径</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>应用世界</td>
+  <td>按照功能分区的应用世界，用户只知道MGX有这些产品，但是不知道他们是谁做的，因此也就不知道自己努力做并且发布后会有人留意到关注到自己除了边栏，页面底端缺少引导用户下滑的App World字样（对于手机端访问的用户并不友好，电脑端这不是太大的问题）</td>
+  <td>建议栏目名称修改为“应用社区”，增加页面底栏“应用社区”字样。调整MGX的社区导向，强化用户的浏览欲望与产品归属感修改每一个应用的作者图标。增加profile中头像的默认Avata设计，用户登陆后即可显示一个默认的虚拟Avata（类似github上的像素头像，增强开发者归属感，同时不要设计得那么好看，引导用户自发上传新头像）调整每一个应用作者信息标识。除头像外增加用户名称大改动：一系列有助于MGX转变为社区化开发空间的产品设计i.e. 个人主页 （但暂时不要开发链接到Github、Reddit、Discord上的能力）个人作品库应用社区高赞榜……</td>
+</tr>
+</tbody>
+</table>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <h1>（二）从用户使用旅程来谈困惑点</h1>
 <h2>用户旅程</h2>
-<!-- Unsupported block type: child_database -->
+<table>
+<tbody>
+<tr>
+  <td>#</td>
+  <td>描述</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>登录</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>查看积分数量</td>
+</tr>
+<tr>
+  <td></td>
+  <td>查看可选模型</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>查看上新功能/玩法</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>查看上传附件类型（多模态功能）</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>探索APP World</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>在Remix上做尝试开发</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>熟悉之后再直接自己的开发</td>
+</tr>
+</tbody>
+</table>
 <h2>困惑点一：团队&工程师模式设计的原因</h2>
 <p>首先，这个模式的含义没有非常明确的介绍，第一时间对我而言增加了隐形的选择负担，这让我比较困惑。</p>
 <p>稍微思考后，个人理解这个模式最大的商业价值在于分别针对“个人开发者”和“企业级用户”提供了自建Demo的途径，方便做商业拓展。但又觉得MGX在迎来大规模的商务拓展之前，早期的用户拓展阶段目标应该更多放在赋能个人开发者，至于企业级用户市场是需要足够的个人用户作为流量来论证MGX的价值之后才能进一步拓展的。</p>
