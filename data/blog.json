@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "blog-2026-01-05-MGX-using-experience",
+    "title": "DeepWisdom - MGX产品使用评测",
+    "date": "2026-01-05T01:00:00.000+08:00",
+    "tags": [
+      "产品",
+      "Multi-Agents"
+    ],
+    "excerpt": "针对类似Manus的Multi-Agent平台做了测i时使用，基于社区内CRM project评测MGX产品本身的不足与优势",
+    "contentUrl": "posts/blogs/2026-01-05-MGX-using-experience.html",
+    "badge": "产品",
+    "badgeStyle": "default"
+  }
+]
