@@ -121,16 +121,33 @@ def sync():
         
         # 提取属性
         try:
-            title = props["Name"]["title"][0]["plain_text"]
-            date = props["Date"]["date"]["start"] if props["Date"]["date"] else datetime.now().strftime("%Y-%m-%d")
-            tags = [t["name"] for t in props["Tags"]["multi_select"]]
-            excerpt = "".join([t["plain_text"] for t in props["Excerpt"]["rich_text"]])
-            category = props["Category"]["select"]["name"]
-            slug = "".join([t["plain_text"] for t in props["Slug"]["rich_text"]])
+            title = props["Name"]["title"][0]["plain_text"] if props.get("Name") and props["Name"]["title"] else None
+            if not title:
+                print(f"跳过行 {row['id']}: 找不到标题(Name)")
+                continue
+                
+            date_val = props.get("Date", {}).get("date")
+            date = date_val["start"] if date_val else datetime.now().strftime("%Y-%m-%d")
+            
+            tags = [t["name"] for t in props.get("Tags", {}).get("multi_select", [])]
+            
+            excerpt_list = props.get("Excerpt", {}).get("rich_text", [])
+            excerpt = "".join([t["plain_text"] for t in excerpt_list])
+            
+            cat_val = props.get("Category", {}).get("select")
+            if not cat_val:
+                print(f"跳过行 {title}: 找不到分类(Category)")
+                continue
+            category = cat_val["name"]
+            
+            slug_list = props.get("Slug", {}).get("rich_text", [])
+            slug = "".join([t["plain_text"] for t in slug_list])
             if not slug:
                 slug = slugify(title)
-        except (KeyError, IndexError):
-            print(f"跳过属性不全的行: {row['id']}")
+                
+            print(f"正在处理文章: {title} ({category})")
+        except Exception as e:
+            print(f"处理行 {row['id']} 时出错: {str(e)}")
             continue
 
         # 获取正文
