@@ -49,13 +49,13 @@ def block_to_html(block):
         text = "".join([t["plain_text"] for t in block["paragraph"]["rich_text"]])
         return f"<p>{text}</p>"
     elif type == "heading_1":
-        text = "".join([t["heading_1"]["rich_text"][0]["plain_text"]]) if block["heading_1"]["rich_text"] else ""
+        text = "".join([t["plain_text"] for t in block["heading_1"]["rich_text"]])
         return f"<h1>{text}</h1>"
     elif type == "heading_2":
-        text = "".join([t["heading_2"]["rich_text"][0]["plain_text"]]) if block["heading_2"]["rich_text"] else ""
+        text = "".join([t["plain_text"] for t in block["heading_2"]["rich_text"]])
         return f"<h2>{text}</h2>"
     elif type == "heading_3":
-        text = "".join([t["heading_3"]["rich_text"][0]["plain_text"]]) if block["heading_3"]["rich_text"] else ""
+        text = "".join([t["plain_text"] for t in block["heading_3"]["rich_text"]])
         return f"<h3>{text}</h3>"
     elif type == "bulleted_list_item":
         text = "".join([t["plain_text"] for t in block["bulleted_list_item"]["rich_text"]])
