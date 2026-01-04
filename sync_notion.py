@@ -38,11 +38,21 @@ def get_db_rows():
 
 def get_children(block_id):
     url = f"https://api.notion.com/v1/blocks/{block_id}/children"
-    res = requests.get(url, headers=HEADERS)
-    if res.status_code != 200:
-        print(f"获取子内容失败! 状态码: {res.status_code}, 详情: {res.text}")
-        res.raise_for_status()
-    return res.json()["results"]
+    params = {"page_size": 100}
+    results = []
+    
+    while True:
+        res = requests.get(url, headers=HEADERS, params=params)
+        if res.status_code != 200:
+            print(f"获取子内容失败! 状态码: {res.status_code}, 详情: {res.text}")
+            res.raise_for_status()
+        data = res.json()
+        results.extend(data["results"])
+        if not data.get("has_more"):
+            break
+        params["start_cursor"] = data["next_cursor"]
+        
+    return results
 
 def rich_text_to_html(rich_text):
     html = ""
@@ -62,8 +72,13 @@ def rich_text_to_html(rich_text):
 def download_image(url, folder, filename):
     os.makedirs(folder, exist_ok=True)
     path = os.path.join(folder, filename)
+    # 如果文件已经存在且不是空的，就不重复下载了（节省流量/时间）
+    if os.path.exists(path) and os.path.getsize(path) > 0:
+        return path
+        
     try:
-        res = requests.get(url, stream=True)
+        print(f"    -> 下载图片: {filename}")
+        res = requests.get(url, stream=True, timeout=10)
         res.raise_for_status()
         with open(path, "wb") as f:
             for chunk in res.iter_content(chunk_size=8192):
@@ -75,6 +90,20 @@ def download_image(url, folder, filename):
 
 def block_to_html(block, page_slug, assets_folder):
     type = block["type"]
+    
+    # 递归处理容器块（列、分栏等）
+    if type == "column_list":
+        cols = get_children(block["id"])
+        html = '<div class="column-list" style="display: flex; gap: 1rem; flex-wrap: wrap;">'
+        for col in cols:
+            html += f'<div class="column" style="flex: 1; min-width: 250px;">'
+            col_children = get_children(col["id"])
+            for child in col_children:
+                html += block_to_html(child, page_slug, assets_folder)
+            html += '</div>'
+        html += '</div>'
+        return html
+    
     if type == "paragraph":
         text = rich_text_to_html(block["paragraph"]["rich_text"])
         return f"<p>{text}</p>"
@@ -107,29 +136,37 @@ def block_to_html(block, page_slug, assets_folder):
         else:
             img_url = block["image"]["file"]["url"]
         
-        # 处理图片下载以防止 Notion 链接失效
-        img_ext = "jpg"
-        if ".png" in img_url.lower(): img_ext = "png"
+        # 提取扩展名
+        img_ext = "png"
+        if ".jpg" in img_url.lower() or ".jpeg" in img_url.lower(): img_ext = "jpg"
         elif ".gif" in img_url.lower(): img_ext = "gif"
         elif ".svg" in img_url.lower(): img_ext = "svg"
         
         img_name = f"{page_slug}-{block['id'][:8]}.{img_ext}"
-        local_path = download_image(img_url, assets_folder, img_name)
-        # 返回相对路径供 HTML 使用
+        download_image(img_url, assets_folder, img_name)
+        
         rel_path = f"../../assets/posts/{img_name}"
         return f'<div class="post-image"><img src="{rel_path}" alt="Notion Image" loading="lazy"></div>'
     elif type == "table":
         rows = get_children(block["id"])
-        html = "<table>\n<thead>\n"
+        has_header = block["table"]["has_column_header"]
+        html = "<table>\n"
+        if has_header:
+            html += "<thead>\n"
+        else:
+            html += "<tbody>\n"
+            
         for i, row in enumerate(rows):
-            if i == 1 and block["table"]["has_column_header"]:
+            if has_header and i == 1:
                 html += "</thead>\n<tbody>\n"
+            
             html += "<tr>\n"
             for cell in row["table_row"]["cells"]:
                 cell_content = rich_text_to_html(cell)
-                tag = "th" if (i == 0 and block["table"]["has_column_header"]) else "td"
+                tag = "th" if (has_header and i == 0) else "td"
                 html += f"  <{tag}>{cell_content}</{tag}>\n"
             html += "</tr>\n"
+        
         html += "</tbody>\n</table>"
         return html
     elif type == "callout":
@@ -141,6 +178,7 @@ def block_to_html(block, page_slug, assets_folder):
         return f'<div class="callout">{icon}<div class="callout-text">{text}</div></div>'
     elif type == "divider":
         return "<hr>"
+    
     return f"<!-- Unsupported block type: {type} -->"
 
 def generate_html(title, date, category, content_html):
@@ -183,6 +221,7 @@ def generate_html(title, date, category, content_html):
             font-size: 1.1rem; 
         }}
         .post-content p {{ margin: 1.4rem 0; }}
+        .post-content h1 {{ margin: 2.5rem 0 1.2rem; font-size: 2rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }}
         .post-content h2 {{ 
             margin: 3rem 0 1.2rem; 
             font-size: 1.8rem; 
@@ -318,18 +357,15 @@ def sync():
     blog_data = []
     notes_data = []
     
-    # 静态文件路径
     ASSETS_FOLDER = "assets/posts"
     os.makedirs(ASSETS_FOLDER, exist_ok=True)
 
     for row in rows:
         props = row["properties"]
         
-        # 提取属性
         try:
             title = props["Name"]["title"][0]["plain_text"] if props.get("Name") and props["Name"]["title"] else None
             if not title:
-                print(f"跳过行 {row['id']}: 找不到标题(Name)")
                 continue
                 
             date_val = props.get("Date", {}).get("date")
@@ -342,7 +378,6 @@ def sync():
             
             cat_val = props.get("Category", {}).get("select")
             if not cat_val:
-                print(f"跳过行 {title}: 找不到分类(Category)")
                 continue
             category = cat_val["name"]
             
@@ -351,13 +386,13 @@ def sync():
             if not slug:
                 slug = slugify(title)
                 
-            print(f"正在处理文章: {title} ({category})")
+            print(f"📡 正在拉取内容: {title} ({category})...")
         except Exception as e:
             print(f"处理行 {row['id']} 时出错: {str(e)}")
             continue
 
-        # 获取正文
-        blocks = get_children(row["id"]) # 使用 get_children 替代 get_page_content
+        # 获取正文（处理所有块）
+        blocks = get_children(row["id"])
         content_parts = []
         in_list = False
         current_list_type = None
@@ -424,7 +459,7 @@ def sync():
     with open("data/notes.json", "w", encoding="utf-8") as f:
         json.dump(notes_data, f, ensure_ascii=False, indent=2)
 
-    print(f"同步完成！共同步 {len(rows)} 篇文章。")
+    print(f"🎉 同步完成！共同步 {len(rows)} 篇文章。")
 
 if __name__ == "__main__":
     sync()
