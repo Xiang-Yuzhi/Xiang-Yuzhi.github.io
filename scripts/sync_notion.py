@@ -199,51 +199,51 @@ def generate_html(title, date, category, content_html):
             line-height: 1.7;
         }}
         .post-container {{
-            max-width: 900px;
+            max-width: 820px;
             margin: 0 auto;
             padding: 4rem 1.5rem 8rem;
         }}
         .post-container h1 {{ 
-            font-size: 2.1rem; 
-            margin-bottom: 0.8rem; 
+            font-size: 1.7rem; 
+            margin-bottom: 0.5rem; 
             color: #fff;
-            letter-spacing: -0.015em;
-            line-height: 1.25;
+            letter-spacing: -0.012em;
+            line-height: 1.2;
         }}
         .post-meta {{ 
-            font-size: 0.88rem; 
+            font-size: 0.8rem; 
             color: var(--muted); 
-            margin-bottom: 3.5rem; 
-            padding-bottom: 1.2rem; 
+            margin-bottom: 2.8rem; 
+            padding-bottom: 0.9rem; 
             border-bottom: 1px solid rgba(148,163,184,0.1); 
         }}
         .post-content {{ 
             color: #d1d5db; 
-            font-size: 0.95rem; 
-            line-height: 1.75;
+            font-size: 0.88rem; 
+            line-height: 1.62;
         }}
-        .post-content p {{ margin: 1.2rem 0; }}
-        .post-content h1 {{ margin: 2.8rem 0 1.2rem; font-size: 1.7rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }}
+        .post-content p {{ margin: 0.9rem 0; }}
+        .post-content h1 {{ margin: 2rem 0 0.8rem; font-size: 1.45rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }}
         .post-content h2 {{ 
-            margin: 3.2rem 0 1.1rem; 
-            font-size: 1.5rem; 
+            margin: 2.22rem 0 0.8rem; 
+            font-size: 1.3rem; 
             color: #fff;
-            border-left: 4px solid var(--accent); 
-            padding-left: 1.1rem; 
+            border-left: 3px solid var(--accent); 
+            padding-left: 0.9rem; 
         }}
-        .post-content h3 {{ margin: 2.2rem 0 0.9rem; font-size: 1.2rem; color: #fff; }}
+        .post-content h3 {{ margin: 1.7rem 0 0.6rem; font-size: 1.05rem; color: #fff; }}
         
         /* 列表 */
-        .post-content ul, .post-content ol {{ padding-left: 1.8rem; margin: 1.5rem 0; }}
-        .post-content li {{ margin: 0.7rem 0; }}
+        .post-content ul, .post-content ol {{ padding-left: 1.4rem; margin: 1.1rem 0; }}
+        .post-content li {{ margin: 0.45rem 0; }}
         
         /* 图片 */
-        .post-image {{ margin: 2.5rem 0; text-align: center; }}
+        .post-image {{ margin: 1.8rem 0; text-align: center; }}
         .post-image img {{ 
             max-width: 100%; 
-            border-radius: 16px; 
-            border: 1px solid rgba(148, 163, 184, 0.1);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3); 
+            border-radius: 10px; 
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3); 
         }}
         
         /* 表格 */
@@ -251,79 +251,85 @@ def generate_html(title, date, category, content_html):
             width: 100%; 
             border-collapse: separate; 
             border-spacing: 0;
-            margin: 2.5rem 0; 
-            font-size: 0.95rem; 
+            margin: 1.8rem 0; 
+            font-size: 0.86rem; 
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(15, 23, 42, 0.35);
         }}
         th, td {{ 
             border-bottom: 1px solid var(--border); 
             border-right: 1px solid var(--border); 
-            padding: 1rem; 
+            padding: 0.75rem; 
             text-align: left; 
         }}
-        th {{ background: rgba(56, 189, 248, 0.05); font-weight: 600; color: var(--accent); }}
+        th {{ background: rgba(56, 189, 248, 0.04); font-weight: 600; color: var(--accent); }}
         tr:last-child td {{ border-bottom: none; }}
         td:last-child, th:last-child {{ border-right: none; }}
         
         /* 引用 */
         blockquote {{ 
-            margin: 2.5rem 0; 
-            padding: 1.2rem 1.8rem; 
-            border-left: 4px solid var(--accent); 
-            background: rgba(56, 189, 248, 0.05); 
+            margin: 1.8rem 0; 
+            padding: 0.9rem 1.4rem; 
+            border-left: 2px solid var(--accent); 
+            background: rgba(56, 189, 248, 0.04); 
             font-style: italic; 
-            border-radius: 0 12px 12px 0; 
+            border-radius: 4px; 
             color: #94a3b8;
         }}
         
         /* 代码 */
         pre {{ 
             background: #0f172a; 
-            padding: 1.5rem; 
-            border-radius: 14px; 
+            padding: 1.1rem; 
+            border-radius: 10px; 
             overflow-x: auto; 
-            margin: 2rem 0; 
+            margin: 1.4rem 0; 
             border: 1px solid rgba(148, 163, 184, 0.1);
         }}
-        code {{ font-family: 'Fira Code', monospace; font-size: 0.95rem; }}
+        code {{ font-family: 'Fira Code', monospace; font-size: 0.82rem; }}
         p code {{ 
-            background: rgba(56, 189, 248, 0.15); 
-            padding: 0.2rem 0.5rem; 
-            border-radius: 6px; 
+            background: rgba(56, 189, 248, 0.08); 
+            padding: 0.15rem 0.35rem; 
+            border-radius: 4px; 
             color: var(--accent); 
-            font-size: 0.9em;
+            font-size: 0.88em;
         }}
         
         /* Callout */
         .callout {{ 
             display: flex; 
             align-items: flex-start; 
-            gap: 1.2rem; 
-            padding: 1.5rem; 
-            background: rgba(148, 163, 184, 0.05); 
-            border-radius: 14px; 
-            margin: 2rem 0; 
+            gap: 0.9rem; 
+            padding: 1rem; 
+            background: rgba(148, 163, 184, 0.03); 
+            border-radius: 8px; 
+            margin: 1.4rem 0; 
             border: 1px solid rgba(148, 163, 184, 0.1); 
         }}
-        .callout-icon {{ font-size: 1.6rem; line-height: 1; }}
+        .callout-icon {{ font-size: 1.3rem; line-height: 1; }}
         
-        .back-link {{ font-size: 1rem; margin-top: 5rem; padding-top: 2.5rem; border-top: 1px solid rgba(148,163,184,0.1); }}
+        /* 返回链接 - 恢复并优化前几版的好看风格 */
+        .back-link {{ font-size: 0.85rem; margin-top: 5rem; padding-top: 2rem; border-top: 1px solid rgba(148,163,184,0.1); }}
         .back-link a {{ 
             color: var(--accent); 
             text-decoration: none; 
             font-weight: 500; 
-            padding: 0.6rem 1.2rem;
-            background: rgba(56, 189, 248, 0.08);
+            padding: 0.6rem 1.3rem;
+            background: rgba(56, 189, 248, 0.06);
             border: 1px solid rgba(56, 189, 248, 0.2);
             border-radius: 999px;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }}
         .back-link a:hover {{ 
-            background: rgba(56, 189, 248, 0.15);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+            transform: translateX(-4px);
         }}
     </style>
 </head>
