@@ -37,6 +37,7 @@
             font-size: 1.1rem; 
         }
         .post-content p { margin: 1.4rem 0; }
+        .post-content h1 { margin: 2.5rem 0 1.2rem; font-size: 2rem; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
         .post-content h2 { 
             margin: 3rem 0 1.2rem; 
             font-size: 1.8rem; 
@@ -158,17 +159,66 @@
 <div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <h2>2. 每次对话积分对应token使用数量不明，严重影响使用体验</h2>
 <p>首先，对话框这里告诉我们不同模型的收费不同</p>
-<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.jpg" alt="Notion Image" loading="lazy"></div>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <p>但是这里没有给用户透出不同LLM大致的定价及对应积分消耗。用户至始至终都不知道积分消耗是依据什么来定的，以及单次对话或者是单个需求提出会消耗多少积分（虽然HR在与我沟通时提到每天5次的免费额度，但我也产生了误解，认为是5次对话额度）。这会造成两个结果：</p>
 <p>具体来看问题的表现。针对这个Remix，我分别提出了两个不同难度等级的需求：</p>
-<!-- Unsupported block type: column_list -->
+<div class="column-list" style="display: flex; gap: 1rem; flex-wrap: wrap;"><div class="column" style="flex: 1; min-width: 250px;"><table>
+<thead>
+<tr>
+  <th>#</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>针对这个CRM，我希望缩窄边栏</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>针对整个CRM适应的业务场景，我希望从头开始重新设计</td>
+</tr>
+</tbody>
+</table><p></p></div><div class="column" style="flex: 1; min-width: 250px;"><div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div></div><div class="column" style="flex: 1; min-width: 250px;"><div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div></div></div>
 <p>细节的问题点及优化建议：</p>
-<!-- Unsupported block type: column_list -->
+<div class="column-list" style="display: flex; gap: 1rem; flex-wrap: wrap;"><div class="column" style="flex: 1; min-width: 250px;"><table>
+<thead>
+<tr>
+  <th><b>#</b></th>
+  <th><b>问题类型</b></th>
+  <th><b>问题描述</b></th>
+  <th><b>Comts</b></th>
+  <th><b>优化建议</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>Multi Agent模式下单一Agent冗余调用</td>
+  <td>进入团队模式后，每一轮对话/提需求，整个Multi-Agent均调用了团队领导者这一Agent，并分别应用在了“理解需求”、“传达需求”、“汇报结果”的环节。</td>
+  <td>• 工作流跟产品团队内部工作流非常类似，面对复杂需求时这样的拆解流程很有用。但对于简单需求（例如一句话就已经完全说明白了），再进行拆解显得不必要（且对用户造成了额外的积分消耗）。
+• 除非团队领导者的调用是明确消耗了多少积分的，否则而且通常情况下，用户实际上也无需感知拆解过程（因为实际上选用MGX来vibe coding的人并不是抱着来学习<u>工作流</u>的想法在MGX上进行产品开发）</td>
+  <td>• 强化需求对话的<b>意图识别</b>，根据用户实际对话内容的含义在执行指令前增加一层判定：
+1）对话需求是否为复杂需求。复杂则需调用团队模式做拆解，不复杂则直接调用Agent；
+2）不复杂需求具体为何种需求，直接调用对应Agent
+用户甚至不需要手动选择哪一种Agent对话模式，而是由Agent判断需求的复杂程度来直接代替用户作出“Default Choice”。用户可以在下一轮对话开始前再手动做调整暂时无法在飞书文档外展示此内容（见右图）</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>单一Agent积分消耗数量不明</td>
+  <td>每一个Agent在调用时没有看到Agent所消耗的积分数量</td>
+  <td>• 由于积分消耗规则不明，按照团队模式工作流，则会存在：
+1） “看似无用”且消耗积分的Agent调用（例如团队领导者Agent，用户不需要它做拆解和总结）
+2） 用户不预期需要的Agent调用（例如明明仅需市场模拟数据来判断可行性，但调用完David之后Alex紧接着就给出了工程解法）</td>
+  <td>• 除了LLM的选用价格外，在每一个Agent调用时都标明所消耗的积分或者token数。给用户提供清晰的感知</td>
+</tr>
+</tbody>
+</table></div><div class="column" style="flex: 1; min-width: 250px;"><div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div></div></div>
 <h2>3. Agent对话框相关设计</h2>
 <!-- Unsupported block type: child_database -->
 <h2>4. 首页团队模式不同Agent的用途介绍无需做成鼠标悬停提示，可以直接展出</h2>
 <p>进入MGX后选择“团队模式”，可以直接将团队角色及功能展出，清晰功能边界，引导用户选择体验而不是设计为悬停。</p>
-<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.jpg" alt="Notion Image" loading="lazy"></div>
+<div class="post-image"><img src="../../assets/posts/2026-01-05-MGX-using-experience-2dee778b.png" alt="Notion Image" loading="lazy"></div>
 <h2>5. 部分导航栏内容及整体产品模块设计可优化调整</h2>
 <!-- Unsupported block type: child_database -->
 <h1>（二）从用户使用旅程来谈困惑点</h1>
