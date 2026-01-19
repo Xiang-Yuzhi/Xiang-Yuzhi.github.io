@@ -199,10 +199,25 @@
 <p>从哲学深层来看，上述问题永远无法得到解决（除非你找到一个平行宇宙，除了你关心的那个因子之外其他都一模一样！PS：这里我想起本科学习的David Lewis的理论）。所以有个“退而求其次”的办法  —— 构造/寻找 “准实验”（quasi-experiment）。准实验也就是说接近实验那样的随机性，这种实验场景是可以人为构造/寻找出来的，然后使之在数学上满足潜在因果框架下的approximated estimation效果。这种思路衍生出很多因果识别的构造方法</p>
 <ol>
 <li><b>DID：双重差分法</b></li>
+</ol>
+<p>现实中构造任何实验的时候都是在具体的时空下去操作的。所以当实验一旦发生，从时间上来说，客观来讲对这个世界上的所有个体而言自然会有个pre-treat group和post-treat group的分别（很显然，实验前和实验后嘛），而在我们关心的研究中，又会操作出来treated group和control group这两类分组。DID的核心思想就是假设能通过“两次”对Mean这一estimator作差来剔除掉藏在时间中的干扰因素，得到干净的因果效应。</p>
+<p>怎么理解这一作差的假设就能实现因果识别呢？可以这样想 —— 要论证treatment是造成区别的原因，那么就相当于在说原本每一个group，随着时间变化，它们在Y上的mean也不会出现明显差别。当treatment接入之后，差别突然变得显著。因此在操作上就表现为：treatment开始前对“treated-group”和control-group作一次差，得到二者的区别，这一区别应该是稳健的。那也就是说，在treatment开始后我们再来对treated-group和control-group作一次差，则前后这两个differences理论上应该“indifferent”（这里一定会有一个验证环节，通常我们叫做“平行趋势检验”。），不然就意味着treatment造成了差异！</p>
+<p>但很明显能发现，这“两个differences理论上indifferent”这个假设就非常非常难实现（平行趋势检验是很难通过的）！因为现实中造成两个group不同的原因太多，怎么可能这么干净地恰好就是这个treatment并被我们识别出呢？就算在我们的DID里，那些随着时间变化也保持稳健的confounders被我们控制住了（要么是对于treated-group和control-group的变化趋势一致，要么是干脆不变化，这个也就是<i>时间固定效应</i>，总而言之就是你的平行趋势检验通过了），仍然有可能有很多随着时间变化而产生变化的confounders对dependent variable的取值发挥着影响（因为它仅仅充分且必要地意味着你控制住了随时间变化而保持稳健的confounders，并不意味着你控制住了所有的confounders）。</p>
+<ol>
 <li><b>SCM：合成控制法</b></li>
+</ol>
+<p>只要是构造实验，都难逃artificial的批评和伴随而生的风险，DID就很明显存在这个问题，因为control group的选取是基于人的经验和treatment蕴含的场景来进行的（当然不排除天才构思，但那或许只是踩中了上帝的设计）。</p>
+<p>Synthetic Control Methods核心思想就是想办法去应对这一弱点，既然是人为构造出treatment，那么关键的条件——control group不妨就用更强、更加科学的方式来构造。这跟中国人合成龙的思路是非常相似的 —— 鹿的角、蛇的身体、鹰的爪……总之你要从非常广泛的候选groups中挑选出它们各自最合适的部分来合成一条龙。</p>
+<p>那么什么样的构造是科学的合成？直觉上说，当然是合成的control group跟treated group越接近越好，因此会需要用上一个衡量两个group“距离”的指标。在SCM中有很多种parameter可以当作衡量距离远近的指标（可以从这篇论文开始研读一下整个SCM的体系：<a href="https://www.aeaweb.org/articles?id=10.1257%2F000282803321455188">https://www.aeaweb.org/articles?id=10.1257/000282803321455188</a>），首先要满足的就是业务场景里的dependent variable在两个组里得长得很像（现状和趋势），其次一个常用的就是观察你想要探究的业务场景里除开dependent variable外的covariates（他们也可以成为confounders）在treated group跟synthetic control groups是不是最相似。当然，这些covariates在合成出来的groups中所发挥的影响力大小有差别（鹿角只占龙的很小一部分，蛇身几乎占了大半），所以你得看treated group里面对应covariates的权重是多大，那你就知道该给对应候选的group赋予多大权重，才方便你从中挑出来你想要的那部分。一般这个环节是通过向量运算进行的。</p>
+<p>但很显然，你只是合成了一个control group，并且这个control group也不是最完美的，因此你本质上还停留在设置实验的环节，因果推断的任务压根还没开始！（Abadie有很多论文讨论了后续因果推断的处理办法，最近也有SDID的方法是在SCM的基础上融合DID做的因果推断）</p>
+<ol>
 <li><b>RDD：断点回归法</b></li>
 </ol>
-<p>上述方法看似能够解决一切问题，但不要忽略的一点是：这些方法所应对的数据都是experimental data！在现实中哪有那么好的机会给我们做实验来收相对干净的数据呢？多数时候都是observational data。而观测性数据里除了包含了大量的confounders之外——并且这些confounders还是我们无法控制它不产生的——它还常常存在核心的treatment本身跟Y之间不独立的情况。针对这一问题，Rubin提出说要不就考虑unconfoundedness好了：只要乱七八糟的confounders（或称covariates）明确要控制哪一个，在此基础上还能知道Y的取值跟treatment variable之间独立，那么我们就可以用CATE来做参数估计了（也就说，只要知道treatment variable和Y的联合分布就好了）。</p>
+<p>可能有人会说DID和RDD是两种完全不同的方法，的确是，但又不是。RDD本质上是DID的衍生。DID更专注于防备藏在“时间”中稳健的confounders，而RDD的话没有太多对时间的限制，你完全可以根据你实际的研究/业务场景来设计一个人为的差别。比方说，你想探究是否领取优惠券对GMV的影响，那你就可以人为构造一个领取优惠券的DDL，然后在一个“相对小”的区间内专注去看领到与没领到的两群人在GMV上是不是显著不同。</p>
+<p>为什么要专门提到相对小区间呢？这便是RDD的衍生之处。DID是对Average Treatment Effect（ATE，也就是前面说到的Mean）的处理，这种处理是对研究中的整个sample space做操作的；但RDD不同，一旦放在原初的整个sample space下去操作，那又会增加很多不可见的confounders进入两个groups中。所以RDD其实处理的是Local Average Treatment Effect（LATE，也就是断点处周边sample的mean，虽然也可以从数学上证明LATE和ATE能够近似，但不展开），你最好是只用它观察局部的一小撮变化。</p>
+<p>RDD的使用还对变量的类型有要求，一定得是连续变量（如果是离散的，那就不需要用LATE了，因为大家都i.i.d.，那还需要什么LATE呢）。在实际业务场景里，你得确保你做实验的某项业务政策调整的确能够“仅仅”使得用户进入实验组的概率发生显著的不同，那么你的RDD实验构造（对照组构造）就是成功的。说到这里你会发现，我们似乎对断点的设置没有一个明确的要求（因为你的业务调整带来的影响可能没有那么死板，你允许黑钻用户超过DDL也能再延长1-2min领取优惠券），这里就会存在Sharp RD和Fuzzy RD两种实操情形。它们的核心区别就是你对断点的要求是否严格。</p>
+<p></p>
+<p>上述这些方法看似能够解决一切问题，但不要忽略的一点是：这些方法所应对的数据都是experimental data！在现实中哪有那么好的机会给我们做实验来收相对干净的数据呢？多数时候都是observational data。而观测性数据里除了包含了大量的confounders之外——并且这些confounders还是我们无法控制它不产生的——它还常常存在核心的treatment本身跟Y之间不独立的情况。针对这一问题，Rubin提出说要不就考虑unconfoundedness好了：只要乱七八糟的confounders（或称covariates）明确要控制哪一个，在此基础上还能知道Y的取值跟treatment variable之间独立，那么我们就可以用CATE来做参数估计了（也就说，只要知道treatment variable和Y的联合分布就好了）。</p>
 <p>常见的PSM和DML都是这种思路。</p>
 <p></p>
 <h2>What is AB Test？</h2>
