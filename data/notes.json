@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "note-2025-01-07-北大光华-ABTest_workshop-lecture1",
+    "title": "北大光华-因果推断与A/B Test实验-Lecture 1",
+    "date": "2026-01-07T20:00:00.000+08:00",
+    "tags": [
+      "方法论",
+      "因果推断",
+      "RCT"
+    ],
+    "excerpt": "2026年北大光华线上公益课程，在商业分析和其他商业实战case中讨论使用因果推断与A/B Test的技巧和能力",
+    "contentUrl": "posts/notes/2025-01-07-北大光华-ABTest_workshop-lecture1.html",
+    "category": "all"
+  }
+]
