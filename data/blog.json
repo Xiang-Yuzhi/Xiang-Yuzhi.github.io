@@ -11,5 +11,18 @@
     "contentUrl": "posts/blogs/2026-01-05-MGX-using-experience.html",
     "badge": "产品",
     "badgeStyle": "default"
+  },
+  {
+    "id": "blog-2026-02-05-XFundPromotionAgent-v1",
+    "title": "XFund Promotion Agent 项目技术架构与实现深度解析 (V7.5)",
+    "date": "2026-02-05T17:00:00.000+08:00",
+    "tags": [
+      "产品",
+      "Multi-Agents"
+    ],
+    "excerpt": "针对基金公司的宣传工作搭建的一站式解决方案，集成了热点追踪、策略生产、宣传物料准备等能力。受成本限制未采用多模态功能。",
+    "contentUrl": "posts/blogs/2026-02-05-XFundPromotionAgent-v1.html",
+    "badge": "产品",
+    "badgeStyle": "default"
   }
 ]
